@@ -11,7 +11,7 @@ namespace ExamenTecnicoFlavio.Models
 
         public int PaginaActual { get; set; } = 1;
 
-        public int TamanoPagina { get; set; } = 10;
+        public int TamanoPagina { get; set; } = 15;
 
         public int TotalRegistros { get; set; }
 
