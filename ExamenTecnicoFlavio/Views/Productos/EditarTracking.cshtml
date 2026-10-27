@@ -1,0 +1,106 @@
+﻿@model ExamenTecnicoFlavio.Models.EditarTrackingViewModel
+
+@{
+    ViewData["Title"] = "Detalle de la orden";
+}
+
+<div class="container mt-4">
+
+    <h2>Detalle de la orden</h2>
+
+    <div class="card shadow-sm mt-3">
+        <div class="card-body">
+
+            <h5 class="card-title mb-4">
+                Información de la venta
+            </h5>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="fw-bold">SalesOrderID</label>
+                    <p>@Model.SalesOrderID</p>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-bold">Fecha de la orden</label>
+                    <p>@Model.FechaOrden.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="fw-bold">Producto</label>
+                    <p>@Model.NombreProducto</p>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-bold">Cantidad</label>
+                    <p>@Model.Cantidad</p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="fw-bold">Precio unitario</label>
+                    <p>@Model.PrecioUnitario.ToString("N2")</p>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="fw-bold">SalesOrderDetailID</label>
+                    <p>@Model.SalesOrderDetailID</p>
+                </div>
+            </div>
+
+            <hr />
+
+            <form asp-controller="Productos"
+                  asp-action="EditarTracking"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" asp-for="SalesOrderID" />
+                <input type="hidden" asp-for="SalesOrderDetailID" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="CarrierTrackingNumber"
+                           class="form-label fw-bold">
+                    </label>
+
+                    <input asp-for="CarrierTrackingNumber"
+                           class="form-control"
+                           maxlength="25"
+                           placeholder="Ingresa el número de seguimiento" />
+
+                    <span asp-validation-for="CarrierTrackingNumber"
+                          class="text-danger"></span>
+
+                    <div class="form-text">
+                        Máximo 25 caracteres. Campo opcional.
+                    </div>
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+                    Guardar cambios
+                </button>
+
+                <a asp-controller="Productos"
+                   asp-action="Detalle"
+                   asp-route-id="@Model.ProductID"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
